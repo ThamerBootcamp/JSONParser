@@ -36,6 +36,10 @@ namespace JsonParser
             {
                 return this.lineNumber;
             }
+            set
+            {
+                this.lineNumber = value;
+            }
         }
         public char Character
         {
@@ -54,7 +58,7 @@ namespace JsonParser
         }
         public bool hasMore(int numOfSteps = 1)
         {
-            if (numOfSteps <= 0) throw new Exception("Invalid number of steps");
+            if (numOfSteps <= 0) throw new Exception("Invalid number of steps ");
             return (this.position + numOfSteps) < this.length;
         }
         public bool hasLess(int numOfSteps = 1)

@@ -56,12 +56,12 @@ namespace JsonParser
             }
             else
             {
-                throw new Exception("Parsing Error: invalid Json");
+                throw new Exception("Parsing Error: invalid Json at line number: " + tokens[0].LineNumber);
             }
             List<string> sep = new List<string> { ",", ":","]" ,"}"};
             if (tokens.Count > 0 && root != null && !sep.Contains(tokens[0].Value)) 
             {
-                throw new Exception("Parsing Error: invalid Json");
+                throw new Exception("Parsing Error: invalid Json at line number: " + tokens[0].LineNumber);
             }
 
             return root;
@@ -89,7 +89,7 @@ namespace JsonParser
                 }
 
             }
-            throw new Exception("Parsing Error: invalid Json object");
+            throw new Exception("Parsing Error: invalid Json object at line number: " + tokens[0].LineNumber);
         }
            
         public static ObjectJSONValue ReadObject(ref List<Token> tokens)
@@ -118,9 +118,13 @@ namespace JsonParser
                     tokens.RemoveAt(0);
                     return new ObjectJSONValue(body);
                 }
+                else
+                {
+                    throw new Exception("Parsing Error: invalid Json object at line number: " + tokens[0].LineNumber);
+                }
 
             }
-            throw new Exception("Parsing Error: invalid Json object");
+            throw new Exception("Parsing Error: invalid Json object at line number: " + tokens[0].LineNumber);
         }
 
         public static KeyValue ReadKeyValue(ref List<Token> tokens)
@@ -143,14 +147,14 @@ namespace JsonParser
                 }
                 else
                 {
-                    throw new Exception("Parsing Error: missing colon after Key");
+                    throw new Exception("Parsing Error: missing colon after Key, at line number: " + tokens[0].LineNumber);
                 }
 
                 return row;
             }
             else
             {
-                throw new Exception("Parsing Error: Token is not a Key");
+                throw new Exception("Parsing Error: Token is not a Key, at line number: " + tokens[0].LineNumber);
             }
         }
     }

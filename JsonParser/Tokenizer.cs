@@ -72,6 +72,9 @@ namespace JsonParser
                 }
             }
 
+            if (this.input.hasMore())
+                throw new Exception("Unexpected token at line number: " + this.input.LineNumber);
+
             return null;
         }
 
@@ -112,6 +115,7 @@ namespace JsonParser
         public override Token tokenize(Tokenizer t)
         {
             t.input.step(Environment.NewLine.Length);
+            t.input.LineNumber++;
             return new Token(t.input.Position, t.input.LineNumber,
                 "NewLine", Environment.NewLine);
         }
@@ -172,7 +176,7 @@ namespace JsonParser
                 type = "boolean";
 
             if (!this.keywords.Contains(value))
-                throw new Exception("Unexpected token");
+                throw new Exception("Unexpected token at line number: " + t.input.LineNumber);
 
             return new Token(t.input.Position, t.input.LineNumber,
                 type, value);
@@ -193,7 +197,7 @@ namespace JsonParser
             string value = t.input.loop(input => input.peek() != '"');
 
             if (t.input.peek() != '"')
-                throw new Exception("Error");
+                throw new Exception("Error at line number: " + t.input.LineNumber);
 
             t.input.step();
 
@@ -237,7 +241,7 @@ namespace JsonParser
                 if (isNegative)
                 {
                     if (Char.IsDigit(t.input.step().step().peek()))
-                        throw new Exception("Error");
+                        throw new Exception("Error at line number: " + t.input.LineNumber);
 
                     value = "-";
 
@@ -245,7 +249,7 @@ namespace JsonParser
                 else
                 {
                     if (Char.IsDigit(t.input.step().peek()))
-                        throw new Exception("Error");
+                        throw new Exception("Error at line number: " + t.input.LineNumber);
                 }
 
                 value += "0";
