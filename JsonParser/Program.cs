@@ -26,8 +26,10 @@ namespace JsonParser
                                     }");
             Input input3 = new Input(@"null");
             Input input4 = new Input(@"""name""");
+            Input input5 = new Input(@"{ ""key here"" : ""value there"" , ""key2"" : ""value2""}");
+            Input input6 = new Input(@"{ ""key here"" : ""value there""}");
 
-            Tokenizer t = new Tokenizer(input2, new Tokenizable[] {
+            Tokenizer t = new Tokenizer(input6, new Tokenizable[] {
                 new StringTokenizer(),
                 new KeywordsTokenizer(new List<string>
                 {
@@ -64,8 +66,9 @@ namespace JsonParser
             //    Console.WriteLine(item.Value + " ---> " + item.Type);
             //}
 
-            JSONValue json = new Json_Parser().parse(tokens);
-            Console.WriteLine(json.Value);
+            JSONValue json = JsonParser.Json_Parser.parse(ref tokens);
+
+            Console.WriteLine(json.print());
 
             Console.WriteLine("done!");
         }
