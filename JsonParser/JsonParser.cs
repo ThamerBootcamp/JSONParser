@@ -7,6 +7,10 @@ namespace JsonParser
     {
         public static JSONValue parse(ref List<Token> tokens)
         {
+            if (tokens.Count== 0)
+            {
+                throw new Exception("Error: No Data Available");
+            }
             JSONValue root;
             var firstToken = tokens[0];
             tokens.RemoveAt(0);
@@ -54,17 +58,12 @@ namespace JsonParser
             {
                 throw new Exception("Parsing Error: invalid Json");
             }
-
-            if (tokens.Count > 0 /*|| root == null*/) 
+            List<string> sep = new List<string> { ",", ":","]" ,"}"};
+            if (tokens.Count > 0 && root != null && !sep.Contains(tokens[0].Value)) 
             {
-                if( tokens.Count==1 && tokens[0].Value == "}")
-                {
-                    //tokens.Clear();
-                    return root;
-                }
-                    //throw new Exception("Parsing Error: invalid Json");
-                
+                throw new Exception("Parsing Error: invalid Json");
             }
+
             return root;
         }
 

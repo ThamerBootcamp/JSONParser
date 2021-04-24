@@ -19,7 +19,7 @@ namespace JsonParser
                                         ""alignment"": ""center"",
                                         ""onMouseUp"": ""sun1.opacity = (sun1.opacity / v);"",
                                         ""More"": {
-                                            ""data"": ""Click Here"",
+                                            ""data"": [true, false],
                                             ""size"": 36,
                                             ""style"": false
                                             }   
@@ -32,10 +32,11 @@ namespace JsonParser
             Input input3 = new Input(@"null");
             Input input4 = new Input(@"""name""");
             Input input5 = new Input(@"{ ""key here"" : ""value there"" , ""key2"" : ""value2""}");
-            Input input6 = new Input(@"{ ""key here"" : { ""key here"" : ""value there""} }");
+            Input input6 = new Input(@"");
             Input input7 = new Input(@"{ ""key here"" : [ ] }");
+            Input input8 = new Input(@"true true");
 
-            Tokenizer t = new Tokenizer(input7, new Tokenizable[] {
+            Tokenizer t = new Tokenizer(input8, new Tokenizable[] {
                 new StringTokenizer(),
                 new KeywordsTokenizer(new List<string>
                 {
