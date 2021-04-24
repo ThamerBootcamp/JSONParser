@@ -27,9 +27,9 @@ namespace JsonParser
             Input input3 = new Input(@"null");
             Input input4 = new Input(@"""name""");
             Input input5 = new Input(@"{ ""key here"" : ""value there"" , ""key2"" : ""value2""}");
-            Input input6 = new Input(@"{ ""key here"" : ""value there""}");
+            Input input6 = new Input(@"{ ""key here"" : { ""key here"" : ""value there""} }");
 
-            Tokenizer t = new Tokenizer(input6, new Tokenizable[] {
+            Tokenizer t = new Tokenizer(input5, new Tokenizable[] {
                 new StringTokenizer(),
                 new KeywordsTokenizer(new List<string>
                 {

@@ -51,10 +51,15 @@ namespace JsonParser
                 throw new Exception("Parsing Error: invalid Json");
             }
 
-            if (tokens.Count > 1 || root == null)
+            if (tokens.Count > 0 /*|| root == null*/) 
             {
-                Console.WriteLine(tokens.Count);
-                throw new Exception("Parsing Error: invalid Json");
+                if( tokens.Count==1 && tokens[0].Value == "}")
+                {
+                    //tokens.Clear();
+                    return root;
+                }
+                //Console.WriteLine(tokens.Count);
+                //throw new Exception("Parsing Error: invalid Json");
             }
             return root;
         }
@@ -92,9 +97,8 @@ namespace JsonParser
 
         public static KeyValue ReadKeyValue(ref List<Token> tokens)
         {
-
             KeyValue row = new KeyValue();
-
+            
             //Token currentToken = tokens[0];
 
             if (tokens[0].Type == "string")
@@ -114,10 +118,10 @@ namespace JsonParser
                     throw new Exception("Parsing Error: missing colon after Key");
                 }
 
-                foreach (var item in tokens)
-                {
-                    Console.Write(item.Value);
-                }
+                //foreach (var item in tokens)
+                //{
+                //    Console.Write(item.Value);
+                //}
                 return row;
             }
             else
