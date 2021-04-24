@@ -15,6 +15,10 @@ namespace JsonParser
             {
                 root = ReadObject(ref tokens);
             }
+            else if (firstToken.Value == "[")
+            {
+                root = ReadArray(ref tokens);
+            }
             else if (firstToken.Type == "string")
             {
                 root = new StringJSONValue(firstToken.Value);
@@ -64,6 +68,31 @@ namespace JsonParser
             return root;
         }
 
+        private static ArrayJSONValue ReadArray(ref List<Token> tokens)
+        {
+            List<JSONValue> body = new List<JSONValue>();
+            while (tokens.Count > 0)
+            {
+                //Token currentToken = tokens[0];
+
+                if (tokens[0].Value == ",") {
+                    tokens.RemoveAt(0);
+                    body.Add(parse(ref tokens));
+                }
+                else if (tokens[0].Value == "]")
+                {
+                    tokens.RemoveAt(0);
+                    return new ArrayJSONValue(body);
+                }
+                else 
+                {
+                    body.Add(parse(ref tokens));
+                }
+
+            }
+            throw new Exception("Parsing Error: invalid Json object");
+        }
+           
         public static ObjectJSONValue ReadObject(ref List<Token> tokens)
         {
             List<KeyValue> body = new List<KeyValue>();
@@ -190,7 +219,6 @@ namespace JsonParser
     public class ObjectJSONValue : JSONValue
     {
         public new List<KeyValue> Value { get; set; }
-        public object StringUtils { get; private set; }
 
         public ObjectJSONValue(List<KeyValue> value)
         {
@@ -216,8 +244,6 @@ namespace JsonParser
 
             }
 
-
-
             print += "}";
 
             return print;
@@ -229,9 +255,30 @@ namespace JsonParser
     }
     class ArrayJSONValue : JSONValue
     {
+        public new List<JSONValue> Value { get; set; }
+
+        public ArrayJSONValue(List<JSONValue> value)
+        {
+            this.Value = value;
+
+        }
         public override string print()
         {
-            throw new NotImplementedException();
+            if(this.Value.Count == 0)
+            {
+                return "[]";
+            }
+            string print = "[ ";
+            for (int i = 0; i < Value.Count; i++)
+            {
+                if (i == Value.Count - 1)
+                    print +=  Value[i].print() + "\n";
+
+                else print += Value[i].print() + ",\n";
+            }
+            print += " ]";
+
+            return print;
         }
     }
 

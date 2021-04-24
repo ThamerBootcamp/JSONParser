@@ -19,10 +19,10 @@ namespace JsonParser
                                         ""alignment"": ""center"",
                                         ""onMouseUp"": ""sun1.opacity = (sun1.opacity / v);"",
                                         ""More"": {
-                                                ""data"": ""Click Here"",
-                                                ""size"": 36,
-                                                ""style"": false
-                                                }   
+                                            ""data"": ""Click Here"",
+                                            ""size"": 36,
+                                            ""style"": false
+                                            }   
                                     }");
             Input input2 = new Input(@"{
                                         ""data"": ""Click Here"",
@@ -33,8 +33,9 @@ namespace JsonParser
             Input input4 = new Input(@"""name""");
             Input input5 = new Input(@"{ ""key here"" : ""value there"" , ""key2"" : ""value2""}");
             Input input6 = new Input(@"{ ""key here"" : { ""key here"" : ""value there""} }");
+            Input input7 = new Input(@"{ ""key here"" : [ ] }");
 
-            Tokenizer t = new Tokenizer(input, new Tokenizable[] {
+            Tokenizer t = new Tokenizer(input7, new Tokenizable[] {
                 new StringTokenizer(),
                 new KeywordsTokenizer(new List<string>
                 {
@@ -45,7 +46,7 @@ namespace JsonParser
                 new JSymbolsTokenizer('{',"opening curly braces"),
                 new JSymbolsTokenizer('}',"closing curly braces"),
                 new JSymbolsTokenizer('[',"opening square bracket"),
-                new JSymbolsTokenizer('[',"closing square bracket"),
+                new JSymbolsTokenizer(']',"closing square bracket"),
                 new JSymbolsTokenizer(':',"colon"),
                 new JSymbolsTokenizer(',',"comma"),
             });
