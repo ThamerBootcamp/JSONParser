@@ -20,7 +20,7 @@ namespace JsonParser
                                         ""onMouseUp"": ""sun1.opacity = (sun1.opacity / v);"",
                                         ""More"": {
                                             ""data"": [true, false],
-                                            ""size"": 36,
+                                            ""size"": 100,
                                             ""style"": false
                                             }   
                                     }");
@@ -31,12 +31,12 @@ namespace JsonParser
                                     }");
             Input input3 = new Input(@"null");
             Input input4 = new Input(@"""name""");
-            Input input5 = new Input(@"{ ""key here"" : ""value there"" , ""key2"" : ""value2""}");
+            Input input5 = new Input(@"{ ""key here"" : true , ""key2"" : ""value2""}");
             Input input6 = new Input(@"");
-            Input input7 = new Input(@"{ ""key here"" : [ ] }");
-            Input input8 = new Input(@"true true");
+            Input input7 = new Input(@"{,, ""key here"" : [ ] }");
+            Input input8 = new Input(@"true");
 
-            Tokenizer t = new Tokenizer(input8, new Tokenizable[] {
+            Tokenizer t = new Tokenizer(input, new Tokenizable[] {
                 new StringTokenizer(),
                 new KeywordsTokenizer(new List<string>
                 {
@@ -76,6 +76,16 @@ namespace JsonParser
             JSONValue json = JsonParser.Json_Parser.parse(ref tokens);
 
             Console.WriteLine(json.print());
+
+
+            List<KeyValue> obj = (List<KeyValue>)json.getValue();
+
+            List<KeyValue> more = (List<KeyValue>)obj[8].getValue();
+
+            Console.WriteLine(more[0].getKey());
+            Console.WriteLine(more[0].getValue());
+
+            //Console.WriteLine();
 
         }
     }

@@ -146,10 +146,6 @@ namespace JsonParser
                     throw new Exception("Parsing Error: missing colon after Key");
                 }
 
-                //foreach (var item in tokens)
-                //{
-                //    Console.Write(item.Value);
-                //}
                 return row;
             }
             else
@@ -162,14 +158,23 @@ namespace JsonParser
     {
         public Object Value { get; set; }
         public abstract string print();
+        public abstract Object getValue();
+
     }
 
 
     class StringJSONValue : JSONValue
     {
+        public new string Value { get; set; }
+
         public StringJSONValue(string value)
         {
             this.Value = value;
+        }
+
+        public override Object getValue()
+        {
+            return (string)this.Value;            
         }
 
         public override string print()
@@ -179,9 +184,16 @@ namespace JsonParser
     }
     class NumberJSONValue : JSONValue
     {
+        public new double Value { get; set; }
+
         public NumberJSONValue(double value)
         {
             this.Value = value;
+        }
+
+        public override Object getValue()
+        {
+            return (double)this.Value;
         }
 
         public override string print()
@@ -191,9 +203,16 @@ namespace JsonParser
     }
     class BooleanJSONValue : JSONValue
     {
+        public new bool Value { get; set; }
+
         public BooleanJSONValue(bool value)
         {
             this.Value = value;
+        }
+
+        public override Object getValue()
+        {
+            return (bool)this.Value;
         }
 
         public override string print()
@@ -209,10 +228,16 @@ namespace JsonParser
             this.Value = "null";
         }
 
+        public override Object getValue()
+        {
+            return (string) this.Value;
+        }
+
         public override string print()
         {
             return (string)this.Value;
         }
+
     }
 
     public class ObjectJSONValue : JSONValue
@@ -237,9 +262,9 @@ namespace JsonParser
             for (int i = 0; i < Value.Count; i++)
             {
                 if(i == Value.Count -1)
-                    print += " " + Value[i].Key + " : " + Value[i].Value.print() + "\n";
+                    print += " \"" + Value[i].Key + "\" : " + Value[i].Value.print() + "\n";
 
-                else print += " " + Value[i].Key + " : " + Value[i].Value.print() + ",\n";
+                else print += " \"" + Value[i].Key + "\" : " + Value[i].Value.print() + ",\n";
 
             }
 
@@ -250,7 +275,10 @@ namespace JsonParser
 
         }
 
-
+        public override Object getValue()
+        {
+            return (List<KeyValue>)this.Value;
+        }
     }
     class ArrayJSONValue : JSONValue
     {
@@ -279,12 +307,26 @@ namespace JsonParser
 
             return print;
         }
+
+        public override Object getValue()
+        {
+            return (List<JSONValue>)this.Value;
+        }
     }
 
     public class KeyValue
     {
         public string Key;
         public JSONValue Value;
+
+        public string getKey()
+        {
+            return this.Key;
+        }
+        public Object getValue()
+        {
+            return this.Value.getValue();
+        }
 
     }
 
