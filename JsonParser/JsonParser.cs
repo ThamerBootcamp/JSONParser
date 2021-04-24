@@ -67,7 +67,7 @@ namespace JsonParser
             return root;
         }
 
-        private static ArrayJSONValue ReadArray(ref List<Token> tokens)
+        public static ArrayJSONValue ReadArray(ref List<Token> tokens)
         {
             List<JSONValue> body = new List<JSONValue>();
             while (tokens.Count > 0)
@@ -284,7 +284,7 @@ namespace JsonParser
             return (List<KeyValue>)this.Value;
         }
     }
-    class ArrayJSONValue : JSONValue
+    public class ArrayJSONValue : JSONValue
     {
         public new List<JSONValue> Value { get; set; }
 
