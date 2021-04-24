@@ -58,8 +58,8 @@ namespace JsonParser
                     //tokens.Clear();
                     return root;
                 }
-                //Console.WriteLine(tokens.Count);
-                //throw new Exception("Parsing Error: invalid Json");
+                    //throw new Exception("Parsing Error: invalid Json");
+                
             }
             return root;
         }
@@ -146,7 +146,7 @@ namespace JsonParser
 
         public override string print()
         {
-            return (string)this.Value;
+            return "\"" + this.Value + "\"";
         }
     }
     class NumberJSONValue : JSONValue
@@ -205,10 +205,19 @@ namespace JsonParser
             }
 
             string print = "{\n";
-            foreach (var item in Value)
+            //foreach (var item in Value)
+            //{
+            for (int i = 0; i < Value.Count; i++)
             {
-                print += " " + item.Key + " : " + item.Value.print() + "\n";
+                if(i == Value.Count -1)
+                    print += " " + Value[i].Key + " : " + Value[i].Value.print() + "\n";
+
+                else print += " " + Value[i].Key + " : " + Value[i].Value.print() + ",\n";
+
             }
+
+
+
             print += "}";
 
             return print;

@@ -11,13 +11,18 @@ namespace JsonParser
 
             Input input = new Input(@"{
                                         ""data"": ""Click Here"",
-                                        ""size"": ""L"",
+                                        ""size"": 1,
                                         ""style"": ""bold"",
                                         ""name"": ""text1"",
                                         ""hOffset"": ""one"",
                                         ""vOffset"": ""two"",
                                         ""alignment"": ""center"",
-                                        ""onMouseUp"": ""sun1.opacity = (sun1.opacity / v);""
+                                        ""onMouseUp"": ""sun1.opacity = (sun1.opacity / v);"",
+                                        ""More"": {
+                                                ""data"": ""Click Here"",
+                                                ""size"": 36,
+                                                ""style"": false
+                                                }   
                                     }");
             Input input2 = new Input(@"{
                                         ""data"": ""Click Here"",
@@ -29,7 +34,7 @@ namespace JsonParser
             Input input5 = new Input(@"{ ""key here"" : ""value there"" , ""key2"" : ""value2""}");
             Input input6 = new Input(@"{ ""key here"" : { ""key here"" : ""value there""} }");
 
-            Tokenizer t = new Tokenizer(input5, new Tokenizable[] {
+            Tokenizer t = new Tokenizer(input, new Tokenizable[] {
                 new StringTokenizer(),
                 new KeywordsTokenizer(new List<string>
                 {
@@ -70,7 +75,6 @@ namespace JsonParser
 
             Console.WriteLine(json.print());
 
-            Console.WriteLine("done!");
         }
     }
 }
