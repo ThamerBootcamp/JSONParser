@@ -66,13 +66,15 @@ JsonParser.cs (Main Design):
     - JsonParser : 
        ~ Controls the flow and decide which JsonValue should the token be via using the method (parse)
     - KeyValue : Helper class
+          [[Inheritance]]
     - JSONValue (abstract & parent): 
-          - StringJSONValue: 
-          - NumberJSONValue:
-          - BooleanJSONValue:
-          - NullJSONValue: 
-          - ObjectJSONValue:
-          - ArrayJSONValue: 
+       ~ Children: 
+          - StringJSONValue 
+          - NumberJSONValue 
+          - BooleanJSONValue
+          - NullJSONValue
+          - ObjectJSONValue
+          - ArrayJSONValue 
 
 
 ```
