@@ -93,7 +93,7 @@ Program.cs (main)
 
 تصميم آخر يعتمد على سهولة الوصول للمتغيرات باستخدام Method Chaining : 
 
-https://github.com/anas-alhmoud/JSON-Parser
+https://github.com/ThamerBootcamp/JSON-Parser
 
 - سبب وجود أكثر من تصميم ناتج من نقاش المجموعة وفهمهم للمشكلة من جهة أخرى. 
 
