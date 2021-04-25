@@ -36,7 +36,8 @@ Input.cs (Starter Code: with some slight changes) :
 
 Tokenizer.cs : 
 
-* It uses the functions inside of Input.cs to generate tokens based on a custom handlers written and tested by the team: 
+* It uses the functions inside of Input.cs to generate tokens based on 
+      a custom handlers written and tested by the team: 
    - WhiteSpaceTokenizer 
    - NewLineTokenizer 
    - JSymbolsTokenizer ({}[],)
