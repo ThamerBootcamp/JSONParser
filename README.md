@@ -92,14 +92,14 @@ Program.cs (main)
 
 # تصميم آخر
 
-تصميم آخر يعتمد على سهولة الوصول للمتغيرات باستخدام Method Chaining : 
+تصميم آخر يعتمد على الوصول للمتغيرات : 
 
-https://github.com/ThamerBootcamp/JSON-Parser
+https://github.com/anas-alhmoud/JSON-Parser
 
 - سبب وجود أكثر من تصميم ناتج من نقاش المجموعة وفهمهم للمشكلة من جهة أخرى. 
 
 
-# أعضاء القروب 
+# أعضاء المجموعة 
 
 1- ثامر مشني 
 
